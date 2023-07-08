@@ -1,17 +1,33 @@
-# Web Interface for Machine Learning Projects with Streamlit   
-## Introduction  
-## How to Deploy Machine Learning Models Using Streamlit
-
+  # How to Deploy Machine Learning Models Using Streamlit
+## Introduction
 Streamlit is a Python library that makes it easy to create interactive web apps for machine learning models. It is a great way to deploy your models to production, as it does not require any prior knowledge of web development.
 
-In this article, we will show you how to deploy a machine learning model using Streamlit. We will use a simple example of a model that predicts the price of a house, but the same principles can be applied to any machine learning model.
+In this article, I will show you how to deploy a machine learning model using Streamlit. I will assume a model that predicts store sells of a group of stores in Ecuador, the same principles can be applied to any machine learning model.
+You can find the jupyter notebook and the python script for the original project here but for the sake of this article I will assume a simple dataset.
 
 ### 1. Prepare your model
 
-The first step is to prepare your model. This means saving it to a file that Streamlit can read. You can do this using the pickle library in Python.
+The first step is to prepare your model. After training and evaluating several model on the training data set, you can save the model to be used in your streamlit app.  This means saving it to a file that Streamlit can read. A typical workflow in machine learning may include the following;
+
+- Get Data
+- Clean/preprocess/transform
+- Train several models
+- Evaluate and optimize the best model
+- Clean/proprocess and transform new data
+- fit machine learning model on new data to make prediction
+  
+You can make the above steps more easier by using the scikit learn pipeline class then using the pickle library in Python to export your final model. This final model may have pipeline containing encoders, imputers, scalers and the final estimator for encoding, handling missing values and scaling unbalanced datasets and the model to be fitted on the dataset.
 
 ```python
+# sample code to export model using pickle
 import pickle
+
+
+pickle.dump(model, open(filename, 'wb'))
+
+
+# sample code to load a pickle file
+
 
 model = pickle.load(open('model.pkl', 'rb'))
 ```
@@ -22,14 +38,16 @@ Once you have your model saved, you can create a Streamlit app. This is a simple
 
 ```python
 import streamlit as st
+import pandas as pd
 
 def main():
     # Get the input data from the user
-    x1 = st.number_input('x1')
-    x2 = st.number_input('x2')
+    feature1 = st.number_input('x1')
+    feature2 = st.number_input('x2')
+    df = pd.DataFrame({"feature1":[feature1],"feature2":[feature2],})
 
     # Make a prediction
-    prediction = model.predict([x1, x2])
+    prediction = model.predict(df)
 
     # Display the prediction to the user
     st.write('The predicted price is', prediction)
