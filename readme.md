@@ -3,7 +3,7 @@
 Streamlit is a Python library that makes it easy to create interactive web apps for machine learning models. It is a great way to deploy your models to production, as it does not require any prior knowledge of web development.
 
 In this article, I will show you how to deploy a machine learning model using Streamlit. I will assume a model that predicts store sells of a group of stores in Ecuador, the same principles can be applied to any machine learning model.
-You can find the jupyter notebook and the python script for the original project here but for the sake of this article I will assume a simple dataset.
+You can find the jupyter notebook and the python script for the original project [here](RegressionPipeline.ipynb) but for the sake of this article I will assume a simple dataset.
 
 ### 1. Prepare your model
 
